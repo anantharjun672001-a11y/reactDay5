@@ -1,70 +1,84 @@
 import React, { useState } from 'react';
 
 const Forms = () => {
-    const [formData,setformData]=useState({
-        username:"Rupan",
-        emailid:" ",
-        password:"",
-        gender:"others"
+    const[formData,setFormData] = useState({
+        username: "",
+        password: "",
+        email: "",
+        gender: ""
     })
+
+   const handleSubmit = (e) =>{
+       e.preventDefault();
+       console.log("Registered User", formData)
+   }
+
+    const handleChange = (e) =>{
+       //console.log( e.target.value);
+       setFormData({...formData,[e.target.name]:e.target.value})   
+    }
     return (
         <div>
-            <h1>forms</h1>
-            <form>
+            <h1>Register Form</h1>
+            <form onSubmit={handleSubmit}>
                 <div>
                     <p>
-                        <label>User Name:</label>
+                        <label>UserName:</label>
                     </p>
                     <p>
-                        <input type='text'
+                        <input 
+                        type='text'
                         name='username'
                         value={formData.username}
-                        placeholder='Enter Your Name'
+                        onChange={handleChange}
+                        placeholder='Enter Your UserName'
                         required
                         />
                     </p>
                 </div>
-                <div>
-                    <p>
-                        <label>Email:</label>
-
-                    </p>
-                    <p>
-                        <input type='email'
-                        name='emailid'
-                        value={formData.emailid}
-                        placeholder='Enter your email id'
-                        required
-                        />
-                    </p>
-                </div>
-                <div>
+                   <div>
                     <p>
                         <label>Password:</label>
                     </p>
                     <p>
-                        <input type='password'
+                        <input 
+                        type='password'
                         name='password'
                         value={formData.password}
-                        placeholder='Enter your Passcode'
+                        onChange={handleChange}
+                        placeholder='Enter Your Password'
                         required
                         />
                     </p>
-
                 </div>
-                <div>
+                  <div>
+                    <p>
+                        <label>Email:</label>
+                    </p>
+                    <p>
+                        <input 
+                        type="email"
+                        name='email'
+                        value={formData.email}
+                        onChange={handleChange}
+                        placeholder='Enter Your Email Id'
+                        required
+                        />
+                    </p>
+                </div>
+                 <div>
                     <p>
                         <label>Gender:</label>
                     </p>
-                    <p>
-                        <select name="gender" value={formData.gender}>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                            <option value="others">Rather Not To Say</option>
-                        </select>
-                    </p>
+                   <p>
+                    <select name="gender" value={formData.gender} onChange={handleChange}>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="others">Rather Not To Say</option>
+                    </select>
+                   </p>
                 </div>
-                <button name='submit'>Register</button>
+                 <button type='submit'>Register</button>
             </form>
         </div>
     );
